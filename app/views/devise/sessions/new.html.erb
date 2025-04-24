@@ -1,0 +1,30 @@
+<div class = "sessions-new-container">
+  <div class = "left">
+    <div class = "catch-container">
+      <p class = "catch-tag">Catch Your Next Trading Opportunity</p>
+      <p class = "under-catch-tag">Trade Anytime, Anywhere. Embark on Your Trading Journey Today!</p>
+    </div>
+  </div>
+
+  <div class = "right">
+    <div class = "login-form-container">
+      <h1>Log in</h1>
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+        <div class="field">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "✉ Email" %>
+        </div>
+
+        <div class="field">
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "🔒︎ Password"  %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Log in" %>
+        </div>
+      <% end %>
+
+      <p>Don't have an account?</p><%= render "devise/shared/links" %>
+    </div>
+  </div>
+</div>
