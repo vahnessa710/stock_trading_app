@@ -16,7 +16,7 @@ class HoldingsController < ApplicationController
             redirect_to holdings_path, notice: "Successfully deposited PHP#{amount}"
         else
           flash.alert = "Invalid Deposit Amount."
-          render :new, status: :unprocessable_entity
+          render :deposit, status: :unprocessable_entity
         end
     end
 end

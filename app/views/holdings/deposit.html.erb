@@ -3,7 +3,7 @@
 
 <h2>Fiat Deposit</h2>
 <div class = "card-deposit">
-    <%= form_with url: deposits_path, method: :post do %>
+    <%= form_with url: deposit_holdings_path, method: :post do %>
         <div class ="deposit-input-group">
             <%= label_tag :initial_balance, "Amount (PHP)" %>
             <%= number_field_tag :initial_balance, step: 0.01 %>

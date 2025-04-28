@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  get "deposits/new"
   devise_for :users
     resources :holdings do
       resources :transactions
+      collection do
+        get :deposit   # show the deposit form
+        post :deposit  # submit the deposit
+      end
     end
-  
-    # post "users/:id/update_balance", to: "holdings#update_balance", as: "update_user_balance"
-    resources :deposits, only: [:new, :create]
     
   namespace :admin do
     resources :users do

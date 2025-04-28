@@ -17,4 +17,3 @@ admin = User.create(
   confirmed_at: Time.now,
   confirmation_sent_at: Time.now
 )
-
