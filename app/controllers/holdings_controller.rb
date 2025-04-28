@@ -3,6 +3,8 @@ class HoldingsController < ApplicationController
         # response = AlphaApi.fetch_records
         # @symbol = response["Meta Data"]["2. Symbol"]
         # @stock_price = response.dig("Time Series (Daily)").values.first.dig("1. open")
+        @initial_balance = current_user.initial_balance
+        @holdings = current_user.holdings
     end
 
     def show

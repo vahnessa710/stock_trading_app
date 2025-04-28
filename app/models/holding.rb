@@ -1,6 +1,6 @@
 class Holding < ApplicationRecord
   belongs_to :user
-  validates :initial_balance, numericality: { greater_than_or_equal_to: 0 }
   validates :symbol, presence: true
   validates :quantity, presence: true
+  scope :for_user, ->(user) { where(user_id: user.id) }
 end

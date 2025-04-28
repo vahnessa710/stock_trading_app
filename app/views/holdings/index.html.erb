@@ -1,5 +1,4 @@
 <p>views/holdings/index.html.erb</p>
-
 <div class="main-container">
   <h1 class="user-info">✉️ <%= current_user.email %> <span class="uid">UID: <%= current_user.id %></span></h1>
   <div class="user-status">👻 Status: <%= current_user.status %></div>
@@ -21,10 +20,16 @@
   </div>
     <div class="portfolio-header">
       <h2>My Portfolio</h2>
+
       <div class="trade-buttons">
         <%= link_to 'Buy Stock', class: 'buy-button' %>
         <%= link_to 'Sell Stock', class: 'sell-button' %>
       </div>
+      <% @holdings.each do |holding| %>
+        Symbol:<%= holding.symbol %>
+        Quantity:<%= holding.quantity %>
+        Value: <%= holding.total_value %>
+      <%end%>
     </div>
   <!-- Display stocks here -->
 </div>
