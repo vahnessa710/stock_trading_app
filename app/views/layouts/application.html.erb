@@ -36,7 +36,7 @@
         <% if user_signed_in? %>
         <%= link_to "Deposit", class: "nav-button" %>
         <span class="nav-button">Buy Stocks</span>
-        <span class="nav-button">Transactions</span>
+        <%= link_to "Transactions", class: "nav-button" %>
         <span class="nav-button">Settings</span>
         <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "logout-button" %>
         <% end %>

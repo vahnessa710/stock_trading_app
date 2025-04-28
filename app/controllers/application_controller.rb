@@ -4,13 +4,21 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
 
+  before_action :set_current_holding
+
+  private
+
+  def set_current_holding
+      @current_holding = current_user.holdings.id
+  end
+
   protected
 
   def after_sign_in_path_for(resource)
     if resource.role == 'admin'
       admin_users_path
     else
-      unauthenticated_root_path
+      authenticated_root_path
     end
   end
 
