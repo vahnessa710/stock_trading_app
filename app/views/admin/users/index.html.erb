@@ -1,0 +1,20 @@
+<p> Find this in views/admin/users/index.html.erb</p>
+<h1>Welcome Admin, <%= current_user.email %>!</h1>
+<div class ="main-admin-show">
+    <div class = "admin-dashboard">
+        <% @users.each do |user| %>
+            <div class="card">
+                <div class="user-status">
+                    <% if user.approved? %>
+                        ✅ Approved
+                    <% else %>
+                        👻 Pending Approval
+                    <% end %>
+                </div>
+                <div class="user-info"> ✉️<%= user.email %> </div>
+                <div class="button-group"><%= button_to "Approve", approve_user_admin_user_path(user), method: :patch %> </div>
+            </div>
+        <%end%>
+    </div>
+</div>
+

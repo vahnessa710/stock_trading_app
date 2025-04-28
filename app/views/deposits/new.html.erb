@@ -1,0 +1,14 @@
+<h1>Deposits#new</h1>
+<p>Find me in app/views/deposits/new.html.erb</p>
+
+<h2>Fiat Deposit</h2>
+<div class = "card-deposit">
+    <%= form_with url: deposits_path, method: :post do %>
+        <div class ="deposit-input-group">
+            <%= label_tag :initial_balance, "Amount (PHP)" %>
+            <%= number_field_tag :initial_balance, step: 0.01 %>
+        </div>
+    <%= submit_tag "Deposit", class: "btn btn-primary" %>
+    <% end %>
+    <p><strong>Available Balance:</strong> PHP<%= number_with_precision(@initial_balance, precision: 2) %></p>
+</div>

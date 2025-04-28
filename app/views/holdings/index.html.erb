@@ -1,2 +1,30 @@
-<p> This is my Holdings#index </p>
-<p>symbol: <%=@symbol%></p>
+<p>views/holdings/index.html.erb</p>
+
+<div class="main-container">
+  <h1 class="user-info">✉️ <%= current_user.email %> <span class="uid">UID: <%= current_user.id %></span></h1>
+  <div class="user-status">👻 Status: <%= current_user.status %></div>
+  <div>
+    <div class="dashboard-container">
+      <div class="card">
+        <div style = "assets-header">
+          <h2>My Assets <i class="fa-solid fa-eye"></i></h2>
+          <%= link_to 'Asset Details', class: 'assets-link' do %>
+            Asset Details <i class="fa-solid fa-arrow-right"></i>
+          <% end %>
+        </div>
+        <div class="asset-details">
+          <p class="asset-label">Total Assets</p>
+          <p class="asset-value"><%=@initial_balance%></p>
+          <div class="button-group"> <button class="btn dark">Deposit</button><button class="btn">Buy Stocks</button></div>
+        </div>
+      </div>
+  </div>
+    <div class="portfolio-header">
+      <h2>My Portfolio</h2>
+      <div class="trade-buttons">
+        <%= link_to 'Buy Stock', class: 'buy-button' %>
+        <%= link_to 'Sell Stock', class: 'sell-button' %>
+      </div>
+    </div>
+  <!-- Display stocks here -->
+</div>

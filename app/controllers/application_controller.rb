@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     if resource.role == 'admin'
       admin_users_path
     else
-      '/holdings' 
+      unauthenticated_root_path
     end
   end
 

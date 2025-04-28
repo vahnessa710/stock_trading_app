@@ -17,55 +17,81 @@
  }
 
 .flash-msg{
-  text-align:center;
-  color: #fff;
-  background-color: #000000;
-  padding-top: 10px;
-  font-size: 12px;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 6px;
+  margin: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: opacity 0.4s ease;
 }
+
+.flash-msg.notice {
+  background-color: #00c851; /* Green */
+  color: white;
+}
+
+.flash-msg.alert {
+  background-color: #ff4444; /* Red */
+  color: white;
+}
+
 .brand-2{
     color: #fff;
     font-weight: bold;
     font-size: 20px;
 }
 
- .user-email-box {
-    font-family: 'Inter', sans-serif;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background-color: #000000;
-    padding: 4px 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    height: 60px;
-  }
+.user-email-box {
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  background-color: #000000;
+  padding: 4px 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  height: 60px;
+  gap: 16px; /* slightly bigger gap for better spacing */
+}
 
-  .user-email-text {
-    font-weight: 500;
-    margin-left: auto;
-    color: #fff;
-  }
+.nav-button {
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+}
 
-  .logout-button {
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    padding: 8px 16px;
-    color: #fff;
-    background-color: #333;
-    border: none;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    display: inline-block;
-  }
+.nav-button:hover {
+  background-color: #222;
+}
 
-  .logout-button:hover {
-    background-color: #111;
-    transform: translateY(-1px);
-  }
+.spacer {
+  margin-left: auto;
+}
 
-  .logout-button:active {
-    transform: scale(0.98);
-  }
+.logout-button {
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 16px;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: inline-block;
+}
+
+.logout-button:hover {
+  background-color: #111;
+  transform: translateY(-1px);
+}
+
+.logout-button:active {
+  transform: scale(0.98);
+}
