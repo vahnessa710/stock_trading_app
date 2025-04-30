@@ -1,9 +1,9 @@
 <div class="main-container">
   <h1 class="user-info">
-    ✉️ <%= current_user.email %> 
+    <i class="fa-solid fa-envelope"></i>&nbsp;<%= current_user.email %> 
     <span class="uid">UID: <%= current_user.id %></span>
   </h1>
-  <div class="user-status">👻 Status: <%= current_user.status %></div>
+  <div class="user-status"><i class="fa-solid fa-user-check user-icon"></i>&nbsp; <%= current_user.status %></div>
 
   <!-- Assets Overview Card -->
   <div class="dashboard-container">
@@ -13,7 +13,9 @@
       </div>
       <div class="asset-details">
         <p class="asset-label">Total Assets</p>
-        <p class="asset-value">$<%= number_with_precision(@balance, precision: 2) %></p>
+        <p class="asset-value">$<%= number_with_precision(@total_value, precision: 2) %></p> 
+        <!-- <p class="asset-label">Wallet Balance</p>
+        <p class="asset-value">$<%= number_with_precision(@balance, precision: 2) %></p> -->
         <div class="button-group">
           <%= link_to 'Deposit', new_holding_path, class: "btn dark" %>
           <%= link_to "Buy Stocks", buy_trades_path, class: "btn" %>

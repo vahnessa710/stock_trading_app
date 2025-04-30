@@ -7,11 +7,19 @@ class TradesController < ApplicationController
 
   def create_buy
     @holding = current_user.holdings.build(holding_params)
-    if @holding.save && @holding.buy_price.present?
-      current_user.decrement!(:balance, @holding.quantity * @holding.buy_price)
+    total_cost = @holding.quantity * @holding.buy_price
+    if @holding.save && @holding.buy_price.present? && current_user.balance >= total_cost
+        current_user.decrement!(:balance, total_cost)
+      Transaction.create!(
+        user: current_user,
+        symbol: @holding.symbol,
+        quantity: @holding.quantity,
+        amount: @holding.buy_price,
+        transaction_type: "buy"
+      )
       redirect_to holdings_path, notice: "Bought #{@holding.quantity} of #{@holding.symbol} shares."
     else
-      flash.alert = "Failed to buy stock."
+      flash.alert = "Insufficient Balance, please deposit to continue."
       render :new_buy, status: :unprocessable_entity
     end
   end
@@ -38,10 +46,18 @@ class TradesController < ApplicationController
   
         sell_from = [holding.quantity, quantity_left_to_sell].min
         holding.decrement!(:quantity, sell_from)
+        holding.destroy if holding.quantity.zero?
         quantity_left_to_sell -= sell_from
       end
-  
+
       current_user.increment!(:balance, sell_price * sell_quantity)
+      Transaction.create!(
+        user: current_user,
+        symbol: @symbol,
+        quantity: sell_quantity,
+        amount: sell_price,
+        transaction_type: "sell"
+      )
       redirect_to holdings_path, notice: "Sold #{sell_quantity} shares of #{@symbol}"
     else
       flash.alert = "Invalid sell request"
@@ -81,7 +97,7 @@ class TradesController < ApplicationController
   end
 
   def set_sell_data
-    @symbol = params[:symbol].upcase
+    @symbol = params[:symbol]
     @holdings = current_user.holdings.owned.consolidated_by_symbol
     @set_holding = @holdings.find { |h| h.symbol == @symbol }
   end

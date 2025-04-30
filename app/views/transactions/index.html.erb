@@ -1,27 +1,67 @@
-<p>views/transactions/index.html.erb</p>
+<div class="main-container">
+  <div class="dashboard-container">
+    
+    <!-- Deposit Transactions -->
+    <div class="card">
+      <div class="card-header">
+        <h2>Deposit History</h2>
+      </div>
+      <% if @deposit_transactions.empty? %>
+        <p class="empty-portfolio">No deposit transactions yet.</p>
+      <% else %>
+        <table class="portfolio-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Amount</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @deposit_transactions.each do |transaction| %>
+              <tr>
+                <td><%= transaction.transaction_type.capitalize %></td>
+                <td><%= number_to_currency(transaction.amount, precision: 2, unit: "$", delimiter: ",") %></td>
+                <td><%= transaction.created_at.strftime("%B %d, %Y %H:%M") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
 
-<h1>Your Transactions</h1>
+    <!-- Stock Transactions -->
+    <div class="card">
+      <div class="card-header">
+        <h2>Buy/Sell History</h2>
+      </div>
+      <% if @stock_transactions.empty? %>
+        <p class="empty-portfolio">No stock transactions yet.</p>
+      <% else %>
+        <table class="portfolio-table">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Symbol</th>
+              <th>Quantity</th>
+              <th>Amount</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @stock_transactions.each do |transaction| %>
+              <tr>
+                <td><%= transaction.transaction_type.capitalize %></td>
+                <td><%= transaction.symbol %></td>
+                <td><%= transaction.quantity %></td>
+                <td><%= number_to_currency(transaction.amount, precision: 2, unit: "$", delimiter: ",") %></td>
+                <td><%= transaction.created_at.strftime("%B %d, %Y %H:%M") %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Transaction Type</th>
-      <th>Stock Symbol</th>
-      <th>Quantity</th>
-      <th>Holding</th>
-      <th>Created At</th>
-    </tr>
-  </thead>
-  
-  <tbody>
-    <% @transactions.each do |transaction| %>
-      <tr>
-        <td><%= transaction.transaction_type %></td>
-        <td><%= transaction.symbol %></td>
-        <td><%= transaction.quantity %></td>
-        <!-- <td><%= transaction.holding.name %></td>  Assuming a name for holding -->
-        <td><%= transaction.created_at.strftime("%B %d, %Y %H:%M") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  </div>
+</div>

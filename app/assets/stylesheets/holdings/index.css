@@ -18,8 +18,12 @@
 .user-status {
   margin-bottom: 1.5rem;
   color: #555;
+  font-size: 14px;
 }
 
+.user-icon{
+  color: hsl(120, 58%, 40%);
+}
 .dashboard-container .card {
   background-color: #f5f5f5;
   padding: 1.5rem;
