@@ -1,20 +1,17 @@
 class HoldingsController < ApplicationController
     def index
-        # response = AlphaApi.fetch_records
-        # @symbol = response["Meta Data"]["2. Symbol"]
-        # @stock_price = response.dig("Time Series (Daily)").values.first.dig("1. open")
-        @initial_balance = current_user.initial_balance
-        @holdings = current_user.holdings
+        @balance = current_user.balance
+        @holdings = current_user.holdings.owned.consolidated_by_symbol
     end
 
-    def show
+    def new #deposit
+        @balance = current_user.balance
     end
 
-    def deposit
-        @initial_balance = current_user.initial_balance
-        amount = params[:initial_balance].to_d
+    def create #deposit
+        amount = params[:balance].to_d
         if amount.positive?
-            current_user.increment!(:initial_balance, amount)
+            current_user.increment!(:balance, amount)
             redirect_to holdings_path, notice: "Successfully deposited PHP#{amount}"
         else
           flash.alert = "Invalid Deposit Amount."
@@ -22,4 +19,9 @@ class HoldingsController < ApplicationController
         end
     end
 
+    private
+    
+    def holding_params
+        params.require(:holding).permit(:symbol, :quantity, :buy_price)
+    end
 end

@@ -1,0 +1,140 @@
+.main-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: sans-serif;
+}
+
+.user-info {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.uid {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.user-status {
+  margin-bottom: 1.5rem;
+  color: #555;
+}
+
+.dashboard-container .card {
+  background-color: #f5f5f5;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
+}
+
+.card-header h2 {
+  margin: 0 0 1rem 0;
+}
+
+.asset-label {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.asset-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #0077cc;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn:hover {
+  background: #005fa3;
+}
+
+.btn.dark {
+  background: #333;
+}
+
+.portfolio-container {
+  margin-top: 2rem;
+}
+
+.portfolio-header {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.trade-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.buy-button, .sell-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  background-color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.buy-button:hover {
+  background-color: hsl(134, 41%, 68%);
+}
+
+.sell-button:hover {
+  background-color: hsl(355, 95%, 50%);
+}
+
+.holdings-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.holding-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+
+.empty-portfolio {
+  font-style: italic;
+  color: #999;
+}
+
+.portfolio-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.portfolio-table th,
+.portfolio-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.portfolio-table th {
+  background-color: #f9f9f9;
+  color: #333;
+  font-weight: 600;
+}
+

@@ -1,30 +1,38 @@
 Rails.application.routes.draw do
   devise_for :users
-    resources :holdings do
-      resources :transactions
-      collection do
-        get :deposit   # show the deposit form
-        post :deposit  # submit the deposit
-      end
-    end
-    
-  namespace :admin do
-    resources :users do
-      member do
-        patch :approve_user
-      end
-    end
-  end
+    resources :holdings
   
-  get "up" => "rails/health#show", as: :rails_health_check
-  
-  authenticated :user do
-    root to: "holdings#index", as: :authenticated_root
-  end
+    resources :transactions, only: [:index]
 
-  devise_scope :user do
-    unauthenticated do
-      root to: "devise/sessions#new", as: :unauthenticated_root
+    resources :trades, only: [] do
+      collection do
+        get :fetch_buy_price
+        get :fetch_sell_price
+        get :buy,  to: "trades#new_buy"
+        post :buy, to: "trades#create_buy"
+  
+        get :sell, to: "trades#new_sell"
+        post :sell, to: "trades#create_sell"
+      end
     end
-  end
+
+    namespace :admin do
+      resources :users do
+        member do
+          patch :approve_user
+        end
+      end
+    end
+  
+    get "up" => "rails/health#show", as: :rails_health_check
+    
+    authenticated :user do
+      root to: "holdings#index", as: :authenticated_root
+    end
+
+    devise_scope :user do
+      unauthenticated do
+        root to: "devise/sessions#new", as: :unauthenticated_root
+      end
+    end
 end

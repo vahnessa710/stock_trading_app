@@ -1,5 +1,27 @@
 <p>views/transactions/index.html.erb</p>
 
-<!-- <% current_user.user_transactions.each do |tx| %>
-  <p><%= tx.transaction_type %> - <%= tx.symbol %> x<%= tx.quantity %></p>
-<% end %> -->
+<h1>Your Transactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Transaction Type</th>
+      <th>Stock Symbol</th>
+      <th>Quantity</th>
+      <th>Holding</th>
+      <th>Created At</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.transaction_type %></td>
+        <td><%= transaction.symbol %></td>
+        <td><%= transaction.quantity %></td>
+        <!-- <td><%= transaction.holding.name %></td>  Assuming a name for holding -->
+        <td><%= transaction.created_at.strftime("%B %d, %Y %H:%M") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

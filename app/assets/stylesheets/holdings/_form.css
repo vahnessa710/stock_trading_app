@@ -1,0 +1,47 @@
+.buy-stock-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    margin: 3rem auto;
+  }
+  
+  .buy-stock-title {
+    font-size: 1.5rem;
+    color: #000;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  
+  .buy-stock-input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+  }
+  
+  .buy-stock-input-group label {
+    background-color: #f3f5f7;
+    padding: 10px;
+    font-size: 1rem;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: #333;
+  }
+  
+  .buy-stock-input-group input[type="text"],
+  .buy-stock-input-group input[type="number"] {
+    background-color: #f3f5f7;
+    border: none;
+    padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  
+  .buy-stock-input-group input:focus {
+    outline: none;
+    box-shadow: none;
+  }
+  

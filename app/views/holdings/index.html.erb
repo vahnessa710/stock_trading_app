@@ -1,35 +1,63 @@
-<p>views/holdings/index.html.erb</p>
 <div class="main-container">
-  <h1 class="user-info">✉️ <%= current_user.email %> <span class="uid">UID: <%= current_user.id %></span></h1>
+  <h1 class="user-info">
+    ✉️ <%= current_user.email %> 
+    <span class="uid">UID: <%= current_user.id %></span>
+  </h1>
   <div class="user-status">👻 Status: <%= current_user.status %></div>
-  <div>
-    <div class="dashboard-container">
-      <div class="card">
-        <div style = "assets-header">
-          <h2>My Assets <i class="fa-solid fa-eye"></i></h2>
-          <%= link_to 'Asset Details', class: 'assets-link' do %>
-            Asset Details <i class="fa-solid fa-arrow-right"></i>
-          <% end %>
-        </div>
-        <div class="asset-details">
-          <p class="asset-label">Total Assets</p>
-          <p class="asset-value"><%=@initial_balance%></p>
-          <div class="button-group"> <%= link_to 'Deposit', deposit_holdings_path, class: "btn dark"%><button class="btn">Buy Stocks</button></div>
-        </div>
-      </div>
-  </div>
-    <div class="portfolio-header">
-      <h2>My Portfolio</h2>
 
-      <div class="trade-buttons">
-        <%= link_to 'Buy Stock', class: 'buy-button' %>
-        <%= link_to 'Sell Stock', class: 'sell-button' %>
+  <!-- Assets Overview Card -->
+  <div class="dashboard-container">
+    <div class="card">
+      <div class="card-header">
+        <h2>Assets Overview <i class="fa-solid fa-eye"></i></h2>
       </div>
-      <% @holdings.each do |holding| %>
-        Symbol:<%= holding.symbol %>
-        Quantity:<%= holding.quantity %>
-        Value: <%= holding.total_value %>
-      <%end%>
+      <div class="asset-details">
+        <p class="asset-label">Total Assets</p>
+        <p class="asset-value">$<%= number_with_precision(@balance, precision: 2) %></p>
+        <div class="button-group">
+          <%= link_to 'Deposit', new_holding_path, class: "btn dark" %>
+          <%= link_to "Buy Stocks", buy_trades_path, class: "btn" %>
+        </div>
+      </div>
     </div>
-  <!-- Display stocks here -->
+  </div>
+
+  <!-- Portfolio Section -->
+  <div class="portfolio-container">
+  <p class="portfolio-header">📊 My Portfolio</p>
+
+  <!-- <div class="trade-buttons">
+    <%= link_to "Buy Stocks", buy_trades_path, class: "buy-button" %>
+    <%= link_to "Sell Stocks", sell_trades_path, class: "sell-button" %>
+  </div> -->
+
+  <% if @holdings.any? %>
+    <div class="card">
+      <table class="portfolio-table">
+        <thead>
+          <tr>
+            <th>Stock</th>
+            <th>Quantity</th>
+            <th>Total Value</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @holdings.each do |holding| %>
+            <tr>
+              <td><%= holding.symbol %></td>
+              <td><%= holding.total_quantity %></td>
+              <td><%= number_to_currency(holding.total_value, unit: "$") %></td>
+              <td>
+                <%= link_to "Sell", sell_trades_path(symbol: holding.symbol), class: "btn btn-secondary", data: { confirm: "Sell #{holding.symbol}?" } %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p>No holdings available.</p>
+  <% end %>
+</div>
 </div>

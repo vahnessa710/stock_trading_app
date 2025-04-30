@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="section-header">
+    <h1>💰 Deposit Funds</h1>
+    <p>Top up your account to start trading confidently.</p>
+  </div>
+
+  <div class="card">
+    <%= form_with url: holdings_path, method: :post, local: true do %>
+      <div class="form-group">
+        <%= label_tag :balance, "Deposit Amount (PHP)" %>
+        <%= number_field_tag :balance, nil, step: 0.01, min: 1, required: true, class: "input" %>
+      </div>
+
+      <div class="form-actions">
+        <%= submit_tag "Deposit", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <div class="price-display">
+      <p><strong>Available Balance:</strong> <span class="price">PHP <%= number_with_precision(@balance, precision: 2) %></span></p>
+    </div>
+  </div>
+
+  <div class="link-home">
+    <%= link_to "← Back to Portfolio", holdings_path %>
+  </div>
+</div>

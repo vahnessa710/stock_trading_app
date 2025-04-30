@@ -1,0 +1,54 @@
+<div class="container">
+
+  <div class="section-header">
+    <h1>Buy a Stock</h1>
+    <p>Select a symbol and quantity to make a purchase.</p>
+  </div>
+
+  <!-- Check Price Form -->
+  <div class="card">
+    <h2>Check Current Price</h2>
+    <%= form_with url: fetch_buy_price_trades_path, method: :get, local: true do |form| %>
+      <div class="form-group">
+        <%= form.label :symbol, "Select Stock Symbol" %>
+        <%= form.select :symbol, options_for_select(["AAPL", "AMZN", "GOOGL", "META", "MSFT", "NVDA", "TSLA"], params[:symbol]), {}, { class: "input", required: true } %>
+      </div>
+      <div class="form-actions">
+        <%= form.submit "Check Price", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+
+    <% if @stock_price.present? %>
+      <div class="price-display">
+        <p><strong><%= @symbol %> Buy Price:</strong></p>
+        <p class="price"><%= number_to_currency(@stock_price.to_f) %></p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Buy Stock Form -->
+  <div class="card">
+    <h2>Buy Shares</h2>
+    <%= form_with model: @holding, url: buy_trades_path, method: :post, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :quantity, "Quantity" %>
+        <%= f.number_field :quantity, value: 1, min: 1, required: true, class: "input" %>
+        <p>Available Balance:$<%= @balance %></p> <%= link_to 'Add Balance', new_holding_path %>
+      </div>
+
+      <% if @symbol.present? %>
+        <%= f.hidden_field :symbol, value: @symbol %>
+      <% end %>
+      <%= f.hidden_field :buy_price, value: @stock_price %>
+
+      <div class="form-actions">
+        <%= f.submit "Buy Stock", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="link-home">
+    <%= link_to '← Back to Holdings', holdings_path %>
+  </div>
+
+</div>

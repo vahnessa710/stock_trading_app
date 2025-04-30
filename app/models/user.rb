@@ -16,7 +16,7 @@ class User < ApplicationRecord
   def approved?
     status == "approved"
   end
-  
+
   private
 
   def set_defaults
