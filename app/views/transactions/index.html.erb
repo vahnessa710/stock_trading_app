@@ -14,7 +14,8 @@
             <tr>
               <th>Type</th>
               <th>Amount</th>
-              <th>Date</th>
+              <th>Payment Method</th>
+              <th>Date & Time</th>
             </tr>
           </thead>
           <tbody>
@@ -22,6 +23,7 @@
               <tr>
                 <td><%= transaction.transaction_type.capitalize %></td>
                 <td><%= number_to_currency(transaction.amount, precision: 2, unit: "$", delimiter: ",") %></td>
+                <td><%= transaction.payment_method %></td>
                 <td><%= transaction.created_at.strftime("%B %d, %Y %H:%M") %></td>
               </tr>
             <% end %>
@@ -44,14 +46,16 @@
               <th>Type</th>
               <th>Symbol</th>
               <th>Quantity</th>
-              <th>Amount</th>
-              <th>Date</th>
+              <th>Avg Price</th>
+              <th>Date & Time</th>
             </tr>
           </thead>
           <tbody>
             <% @stock_transactions.each do |transaction| %>
               <tr>
-                <td><%= transaction.transaction_type.capitalize %></td>
+                <td class="<%= transaction.transaction_type == 'buy' ? 'buy-type' : 'sell-type' %>">
+                  <%= transaction.transaction_type.capitalize %>
+                </td>
                 <td><%= transaction.symbol %></td>
                 <td><%= transaction.quantity %></td>
                 <td><%= number_to_currency(transaction.amount, precision: 2, unit: "$", delimiter: ",") %></td>

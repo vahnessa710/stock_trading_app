@@ -16,10 +16,10 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" >
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -29,21 +29,19 @@
     <% flash.each do |type, message|%>
       <div class = "flash-msg"> <%= message %> </div>
     <% end %>
-    
-      <div class="user-email-box">
-        <span class="brand-2">TradeApp</span>
-        <div class="spacer"></div>
-        <% if current_user && current_user.trader? %>
-          <%= link_to "Home", holdings_path, class: "nav-button" %>
-          <%= link_to "Deposit", new_holding_path, class: "nav-button" %>
-          <%= link_to "Transactions", transactions_path, class: "nav-button" %>
-          <span class="nav-button">Settings</span>
-          <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "logout-button" %>
-        <% elsif current_user && current_user.admin? %>
-          <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "logout-button" %>
-        <% end %>
-      </div>
-
+    <div class="user-email-box"> 
+      <span class="brand-2"><i class="fa-solid fa-gem brand-1"></i>&nbsp;<span class="brand-1">Ruby</span>Exchange</span>
+      <div class="spacer"></div>
+      <% if current_user && current_user.trader? %>
+        <%= link_to "Home", holdings_path, class: "nav-button" %>
+        <%= link_to "Deposit", new_holding_path, class: "nav-button" %>
+        <%= link_to "Transactions", transactions_path, class: "nav-button" %>
+        <%= link_to "Buy Stocks", buy_trades_path, class: "nav-button" %>
+        <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "logout-button" %>
+      <% elsif current_user && current_user.admin? %>
+        <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "logout-button" %>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>

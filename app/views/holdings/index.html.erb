@@ -1,8 +1,8 @@
 <div class="main-container">
-  <h1 class="user-info">
+  <div class="user-info">
     <i class="fa-solid fa-envelope"></i>&nbsp;<%= current_user.email %> 
     <span class="uid">UID: <%= current_user.id %></span>
-  </h1>
+  </div>
   <div class="user-status"><i class="fa-solid fa-user-check user-icon"></i>&nbsp; <%= current_user.status %></div>
 
   <!-- Assets Overview Card -->
@@ -12,10 +12,17 @@
         <h2>Assets Overview <i class="fa-solid fa-eye"></i></h2>
       </div>
       <div class="asset-details">
-        <p class="asset-label">Total Assets</p>
-        <p class="asset-value">$<%= number_with_precision(@total_value, precision: 2) %></p> 
-        <!-- <p class="asset-label">Wallet Balance</p>
-        <p class="asset-value">$<%= number_with_precision(@balance, precision: 2) %></p> -->
+        <p class="asset-label">Total Assets(Stocks)</p>
+        <p class="asset-value"><%= number_with_precision(@total_value, precision: 2, delimiter: ',') %> <span class="usd">USD</span></p>
+        <p class="asset-label">Fiat Balance</p>
+        <p class="asset-value"><%= number_with_precision(@balance, precision: 2, delimiter: ',') %> <span class="usd">USD</span></p>
+        <p class="asset-label">Unrealized Profit/Loss</p>
+        <p class="asset-value <%= @unrealized_profit >= 0 ? 'profit-green' : 'sell-red' %>">
+          <%= number_with_precision(@unrealized_profit, precision: 2, delimiter: ',') %>
+          <span class="usd">USD</span>
+        </p>
+
+
         <div class="button-group">
           <%= link_to 'Deposit', new_holding_path, class: "btn dark" %>
           <%= link_to "Buy Stocks", buy_trades_path, class: "btn" %>
@@ -27,11 +34,6 @@
   <!-- Portfolio Section -->
   <div class="portfolio-container">
   <p class="portfolio-header">📊 My Portfolio</p>
-
-  <!-- <div class="trade-buttons">
-    <%= link_to "Buy Stocks", buy_trades_path, class: "buy-button" %>
-    <%= link_to "Sell Stocks", sell_trades_path, class: "sell-button" %>
-  </div> -->
 
   <% if @holdings.any? %>
     <div class="card">
@@ -49,7 +51,7 @@
             <tr>
               <td><%= holding.symbol %></td>
               <td><%= holding.total_quantity %></td>
-              <td><%= number_to_currency(holding.total_value, unit: "$") %></td>
+              <td><%= holding.total_value %> USD</td>
               <td>
                 <%= link_to "Sell", sell_trades_path(symbol: holding.symbol), class: "btn btn-secondary", data: { confirm: "Sell #{holding.symbol}?" } %>
               </td>

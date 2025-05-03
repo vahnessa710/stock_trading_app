@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
-  font-family: sans-serif;
+  font-family: "IBM Plex Sans", sans-serif;
 }
 
 .user-info {
@@ -13,12 +13,6 @@
 .uid {
   font-size: 0.9rem;
   color: #888;
-}
-
-.user-status {
-  margin-bottom: 1.5rem;
-  color: #555;
-  font-size: 14px;
 }
 
 .user-icon{
@@ -39,12 +33,20 @@
 .asset-label {
   color: #777;
   font-size: 0.9rem;
+  margin-bottom: 10px;
 }
 
 .asset-value {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.7rem;
   margin-bottom: 1rem;
+  font-weight: 650;
+}
+
+.usd{
+  font-size: 14px;
+  position: relative;
+  top: -7px; 
+  font-weight: 500;
 }
 
 .button-group {
@@ -79,30 +81,6 @@
   font-size: 1.3rem;
   font-weight: bold;
   margin-bottom: 1rem;
-}
-
-.trade-buttons {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.buy-button, .sell-button {
-  padding: 0.5rem 1rem;
-  border: 1px solid #ccc;
-  background-color: white;
-  border-radius: 8px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.buy-button:hover {
-  background-color: hsl(134, 41%, 68%);
-}
-
-.sell-button:hover {
-  background-color: hsl(355, 95%, 50%);
 }
 
 .holdings-list {
@@ -142,3 +120,12 @@
   font-weight: 600;
 }
 
+.profit-green{
+  color: #28a745; /* Bootstrap green */
+  font-weight: bold;
+}
+
+.sell-red {
+  color: #dc3545; /* Bootstrap red */
+  font-weight: bold;
+}

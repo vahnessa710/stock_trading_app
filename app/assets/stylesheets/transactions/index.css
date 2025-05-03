@@ -1,7 +1,6 @@
 .transactions-container {
     max-width: 900px;
     margin: 2rem auto;
-    font-family: 'Helvetica Neue', sans-serif;
   }
   
   .transactions-container h1 {
@@ -42,5 +41,15 @@
     color: #444;
     border-bottom: 2px solid #eee;
     padding-bottom: 4px;
+  }
+
+  .buy-type {
+    color: #28a745; /* Bootstrap green */
+    font-weight: bold;
+  }
+  
+  .sell-type {
+    color: #dc3545; /* Bootstrap red */
+    font-weight: bold;
   }
   

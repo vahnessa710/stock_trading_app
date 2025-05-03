@@ -1,0 +1,133 @@
+.holding-new-container {
+  margin: 5rem auto;
+  padding: 3rem;
+  color: #333;
+  padding-right: 200px;
+  padding-left: 200px;
+  display: flex;
+  justify-content: space-around;
+  background-color: #f5f7fa;
+  height: 70vh;
+}
+
+/* Wrapper for side-by-side layout */
+.deposit-wrapper {
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Left section - text */
+.holding-new-section-header {
+  flex: 1;
+  text-align: center;
+}
+
+.deposit-funds {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.holding-new-section-header p {
+  font-size: 1.1rem;
+  color: #666;
+
+}
+
+/* Right section - form */
+.holding-new-right-card {
+  width: 50%;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
+}
+
+.deposit-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.deposit-form-group label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Form button */
+.deposit-form-actions {
+  text-align: right;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Balance display */
+.price-display {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  border-radius: 8px;
+}
+
+.price {
+  font-size: 1.25rem;
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Navigation link */
+.link-home {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.link-home a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-home a:hover {
+  text-decoration: underline;
+}
+
+/* Remove arrows from number input */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield; /* Firefox */
+}

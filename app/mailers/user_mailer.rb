@@ -1,6 +1,5 @@
 class UserMailer < ApplicationMailer
-  default from: "notifications@tradeapp.com"
-
+  default from: 'rubyexchange@gmail.com'
   def approved_email(user)
     return unless user && user.email.present?
     @user = user

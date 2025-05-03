@@ -9,6 +9,6 @@ class Holding < ApplicationRecord
     select("symbol, SUM(quantity) AS total_quantity, SUM(quantity * buy_price) AS total_value")
       .group(:symbol)
       .order(:symbol)
-  }
+  } # to consolidate all quantity and get total_value
   scope :actual_holdings_for, ->(symbol) {where(symbol: symbol).where("quantity > 0").order(:created_at)}
 end

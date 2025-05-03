@@ -1,105 +1,157 @@
+/* Flex container for section header + form */
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+  padding: 50px 30px;
+  background-color: #f5f7fa;
+  margin-top: 30px;
+}
+
+/* Left side: Header section */
+.section-header {
+  text-align: left;
+  padding: 20px;
+}
+
+.section-header h1 {
+  font-size: 48px;
+  margin-bottom: 0.5rem;
+}
+
+.section-header p {
+  font-size: 1rem;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* Right side: Form container */
 .container {
-    max-width: 700px;
-    margin: 2rem auto;
-    padding: 1rem;
-    font-family: 'Segoe UI', sans-serif;
-    color: #333;
+  flex: 1;
+  max-width: 700px;
+  padding: 1rem;
+  color: #333;
+}
+
+/* Card UI box */
+.card {
+  background: #fff;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.caption {
+  font-size: 0.9rem;
+  color: #777;
+  line-height: 1.6;
+}
+
+/* Form styling */
+.form-group {
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+.form-group label {
+  line-height: 1.5;
+}
+
+.input {
+  width: 100%;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.input-inline {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+}
+
+.btn-secondary {
+  background-color: #e2e6ea;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #d6d8db;
+}
+
+.form-actions {
+  text-align: right;
+}
+
+.price-display {
+  background-color: #f1f3f5;
+  padding: 1rem;
+  margin-top: 1rem;
+  border-radius: 8px;
+}
+
+.price {
+  font-size: 1.5rem;
+  color: #28a745;
+  font-weight: bold;
+}
+
+/* Footer link */
+.link-home {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.link-home a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.link-home a:hover {
+  text-decoration: underline;
+}
+
+/* ✅ Responsive tweaks */
+@media (max-width: 768px) {
+  .flex {
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
   }
-  
+
   .section-header {
     text-align: center;
-    margin-bottom: 2rem;
+    flex: none;
+    padding: 0;
   }
-  
+
   .section-header h1 {
     font-size: 2rem;
-    margin-bottom: 0.5rem;
   }
-  
-  .section-header p {
-    font-size: 0.9rem;
-    color: #777;
+
+  .container {
+    padding: 0;
+    max-width: 100%;
   }
-  
-  .card {
-    background: #fff;
-    padding: 1.5rem;
-    margin-bottom: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  }
-  
-  .form-group {
-    margin-bottom: 1.2rem;
-  }
-  
-  .input {
-    width: 100%;
-    padding: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-  }
-  
-  .input-inline {
-    display: flex;
-    gap: 0.5rem;
-  }
-  
-  .btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-  
-  .btn-primary {
-    background-color: #007bff;
-    color: white;
-  }
-  
-  .btn-primary:hover {
-    background-color: #0069d9;
-  }
-  
-  .btn-secondary {
-    background-color: #e2e6ea;
-    color: #333;
-  }
-  
-  .btn-secondary:hover {
-    background-color: #d6d8db;
-  }
-  
-  .form-actions {
-    text-align: right;
-  }
-  
-  .price-display {
-    background-color: #f1f3f5;
-    padding: 1rem;
-    margin-top: 1rem;
-    border-radius: 8px;
-  }
-  
-  .price {
-    font-size: 1.5rem;
-    color: #28a745;
-    font-weight: bold;
-  }
-  
-  .link-home {
-    text-align: center;
-    margin-top: 2rem;
-  }
-  
-  .link-home a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  .link-home a:hover {
-    text-decoration: underline;
-  }
-  
+}

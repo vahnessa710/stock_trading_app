@@ -2,7 +2,10 @@ class HoldingsController < ApplicationController
     def index
         @balance = current_user.balance
         @holdings = current_user.holdings.owned.consolidated_by_symbol
-        @total_value = Holding.sum { |holding| holding.buy_price.to_d }
+        @total_value = @holdings.sum(&:total_value)
+        total_buys = current_user.transactions.where(transaction_type: "buy").sum("amount * quantity")
+        total_sells = current_user.transactions.where(transaction_type: "sell").sum("amount * quantity")
+        @unrealized_profit = total_sells - total_buys
     end
 
     def new #deposit
@@ -17,10 +20,11 @@ class HoldingsController < ApplicationController
                 Transaction.create!(
                   user: current_user,
                   amount: amount,
-                  transaction_type: "deposit"
+                  transaction_type: "deposit",
+                  payment_method: params[:payment_method]
                 )
               end
-            redirect_to holdings_path, notice: "Successfully deposited PHP#{amount}"
+            redirect_to holdings_path, notice: "Successfully deposited PHP#{ActionController::Base.helpers.number_with_precision(amount, precision: 2, delimiter: ',')}"
         else
           flash.alert = "Invalid Deposit Amount."
           render :deposit, status: :unprocessable_entity

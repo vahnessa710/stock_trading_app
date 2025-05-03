@@ -7,27 +7,33 @@ class TradesController < ApplicationController
 
   def create_buy
     @holding = current_user.holdings.build(holding_params)
-    total_cost = @holding.quantity * @holding.buy_price
-    if @holding.save && @holding.buy_price.present? && current_user.balance >= total_cost
+    @balance = current_user.balance
+    if @holding.buy_price.present? && @holding.quantity.present?
+      total_cost = @holding.quantity * @holding.buy_price
+      
+      if current_user.balance >= total_cost && @holding.save
         current_user.decrement!(:balance, total_cost)
-      Transaction.create!(
-        user: current_user,
-        symbol: @holding.symbol,
-        quantity: @holding.quantity,
-        amount: @holding.buy_price,
-        transaction_type: "buy"
-      )
-      redirect_to holdings_path, notice: "Bought #{@holding.quantity} of #{@holding.symbol} shares."
+        Transaction.create!(
+          user: current_user,
+          symbol: @holding.symbol,
+          quantity: @holding.quantity,
+          amount: @holding.buy_price,
+          transaction_type: "buy"
+        )
+        redirect_to holdings_path, notice: "Bought #{@holding.quantity} of #{@holding.symbol} shares."
+      else
+        flash.alert = "Insufficient balance or invalid input."
+        render :new_buy, status: :unprocessable_entity
+      end
     else
-      flash.alert = "Insufficient Balance, please deposit to continue."
-      render :new_buy, status: :unprocessable_entity
-    end
+        flash.alert = "Please provide valid quantity and price."
+        render :new_buy, status: :unprocessable_entity
+      end
   end
 
   def new_sell
     if @set_holding.nil?
-      flash[:alert] = "Holding not found for the selected symbol."
-      redirect_to holdings_path
+      redirect_to holdings_path, alert: "Holding not found for the selected symbol."
     end
   end
 
@@ -37,13 +43,11 @@ class TradesController < ApplicationController
     actual_holdings = current_user.holdings.actual_holdings_for(@symbol)
     total_quantity_available = actual_holdings.sum(&:quantity)
   
-    if @set_holding && total_quantity_available >= sell_quantity && sell_price.present?
-      # Reduce the quantity starting from the oldest holdings (FIFO)
+    if @set_holding && total_quantity_available >= sell_quantity && sell_price > 0
       quantity_left_to_sell = sell_quantity
   
       actual_holdings.each do |holding|
         break if quantity_left_to_sell <= 0
-  
         sell_from = [holding.quantity, quantity_left_to_sell].min
         holding.decrement!(:quantity, sell_from)
         holding.destroy if holding.quantity.zero?
@@ -60,12 +64,11 @@ class TradesController < ApplicationController
       )
       redirect_to holdings_path, notice: "Sold #{sell_quantity} shares of #{@symbol}"
     else
-      flash.alert = "Invalid sell request"
+      flash.alert = "Invalid sell request."
       render :new_sell, status: :unprocessable_entity
     end
   end
   
-
   def fetch_buy_price
     @symbol = params[:symbol].upcase
     response = AlphaApi.fetch_records(@symbol)

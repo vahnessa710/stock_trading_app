@@ -10,18 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_30_191812) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_03_050845) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "holdings", force: :cascade do |t|
     t.string "symbol"
     t.integer "quantity"
-    t.decimal "buy_price"
+    t.decimal "buy_price", precision: 10, scale: 2
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.decimal "total_value", precision: 15, scale: 2
     t.index ["user_id"], name: "index_holdings_on_user_id"
   end
 
@@ -32,9 +31,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_30_191812) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "holding_id"
     t.decimal "amount", precision: 15, scale: 2
-    t.index ["holding_id"], name: "index_transactions_on_holding_id"
+    t.string "payment_method"
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
@@ -60,6 +58,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_30_191812) do
   end
 
   add_foreign_key "holdings", "users"
-  add_foreign_key "transactions", "holdings"
   add_foreign_key "transactions", "users"
 end
