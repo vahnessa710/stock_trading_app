@@ -1,55 +1,118 @@
 .main-admin-show {
-    padding: 4rem;
-    background-color: #f4f6f8;
-    min-height: 100vh;
-    font-family: "IBM Plex Sans", sans-serif;
-  }
-  
-  .admin-dashboard{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: flex-start;
-  }
-  
-  .user-status {
-    background-color: hsl(39, 87%, 80%);
-    padding: 8px;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
-    font-weight: 600;
-    color: #555;
-    font-size: 14px;
-    width: 18%;
-    text-align: center;
-  }
-  
-  .user-info {
-    font-size: 1.3rem;
-    font-weight: 500;
-    color: #121212;
-    margin-bottom: 1.5rem;
-    word-break: break-word;
-  }
-  
-  .button-group {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .button-group button {
-    padding: 0.5rem 1.2rem;
-    font-size: 1rem;
-    background-color: #eda010;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .button-group button:hover {
-    background-color: #c9880e;
-  }
-  
+  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  border: solid 1px hsl(0, 0%, 80%);
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.main-all-users {
+  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.pending-approval-h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #2c3e50;
+}
+
+.pending-user-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.pending-user-card > div {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 14px;
+  padding: 12px;
+  padding-left: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 50%;
+}
+
+.user-info-admin {
+  font-size: 17px;
+  color: #333;
+  flex: 1;
+}
+
+.approve-button {
+  padding:9px;
+  border-radius: 10px;
+  border: transparent;
+  background-color: hsl(120, 100%, 35%);
+  color: white;
+  margin-left: 30px;
+  cursor:pointer;
+}
+.approve-button:hover{
+  background-color: hsl(120, 100%, 25%);
+}
+.no-pending-user {
+  color: #2c3e50;
+  text-align: center;
+  font-size: 15px;
+  margin-top: 40px;
+}
+
+.new-user-button-container {
+  display: inline-flex;
+  align-items: center;
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  text-decoration: none; /* in case you turn this into a link later */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+.new-user-button-container i {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.new-user-button {
+  font-weight: 500;
+}
+
+.admin-user-table {
+  width: 100%;
+  max-width: 1000px;
+  margin: 30px auto;
+  border-collapse: collapse;
+}
+
+.admin-user-table thead {
+  color: #2c3e50;
+}
+
+.admin-user-table th {
+  padding: 12px 16px;
+  text-align: left;
+}
+
+.admin-user-table td {
+  padding: 12px 16px 16px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.admin-user-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+

@@ -17,6 +17,10 @@ class User < ApplicationRecord
     status == "approved"
   end
 
+  def pending?
+    status == "pending"
+  end
+
   private
 
   def set_defaults
