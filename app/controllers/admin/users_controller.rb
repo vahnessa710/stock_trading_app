@@ -12,12 +12,56 @@ class Admin::UsersController < ApplicationController
     end
     
     def show
+        @user = User.find(params[:id])
+    end
+
+    def edit 
+        @user = User.find(params[:id])
+    end
+
+    def update
+        @user = User.find(params[:id])
+        if @user.update!(user_params)
+            redirect_to admin_user_path(@user), notice: 'Account Info is successfully updated.'
+        else
+            flash.alert = "Error in Updating Account Info."
+            render :edit, status: :unprocessable_entity
+        end
+    end
+
+    def new
+        @user = User.new
+    end
+
+    def create
+        @user = User.new(user_params_with_defaults)
+        if @user.save
+            UserMailer.account_created_email(@user, "123456").deliver_later
+            redirect_to admin_users_path, notice: "Trader successfully created. Login credentials emailed to #{@user.email}."
+        else
+            flash.alert = "Error in creating new trader."
+            render :new, status: :unprocessable_entity
+        end
     end
 
     private
 
-    def user_params
-        params.require(:user).permit(:email, :password, :password_confirmation, :status)
+    def set_user_id
+        @user = User.find(params[:id])
     end
+
+    def user_params
+        params.require(:user).permit(:first_name, :last_name, :email)
+    end
+
+    def user_params_with_defaults
+        user_params.merge(
+          password: "123456",
+          password_confirmation: "123456",
+          role: "trader",
+          status: "approved",
+          confirmed_at: Time.now
+        )
+      end
 end
   

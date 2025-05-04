@@ -21,6 +21,9 @@ Rails.application.routes.draw do
         member do
           patch :approve_user
         end
+        collection do
+          get :pending
+        end
       end
     end
   

@@ -1,0 +1,15 @@
+<p>Hello <%= @user.email %>,</p>
+
+<p>You are preselected to our trading platform and is approved by the admin. If you wish to proceed with the invitation, Here are your login credentials:</p>
+
+<ul>
+  <li>Email: <%= @user.email %></li>
+  <li>Password: <%= @plain_password %></li>
+</ul>
+
+<p>We recommend you change your password immediately after logging in.</p>
+
+<p>Note: This is an automated email. Please do not reply.</p>
+
+<p>Best regards,</p>
+<p>RubyExchange</p>

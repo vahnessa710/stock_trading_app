@@ -11,7 +11,8 @@
         </div>
 </div>
 <div class ="main-all-users">
-<h1 class = "pending-approval-h1" >Active Traders</h1> 
+<h1 class = "pending-approval-h1" >All Traders</h1>
+<p><%= link_to 'See all pending approval', pending_admin_users_path %></p>
     <div class ="new-user-button-container"><i class="fa-solid fa-plus"></i><span class = "new-user-button">New</span></div>
         <table class="admin-user-table">
   <thead>
@@ -27,6 +28,7 @@
         <td><%= user.email %></td>
         <td><%= user.status.capitalize %></td>
         <td><%= user.created_at.strftime("%B %d, %Y") %></td>
+        <td><%= link_to "View Account", admin_user_path(user) %></td>
       </tr>
     <% end %>
   </tbody>

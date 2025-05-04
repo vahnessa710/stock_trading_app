@@ -1,0 +1,30 @@
+<%= form_with model: [:admin, user] do |form| %>
+  <div>
+    <%= form.label :first_name %><br>
+    <%= form.text_field :first_name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :last_name %><br>
+    <%= form.text_field :last_name, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :email %><br>
+    <%= form.email_field :email, required: true %>
+  </div>
+
+  <div>
+    <%= form.label :address %><br>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :birthday %><br>
+    <%= form.date_field :birthday %>
+  </div>
+
+  <div>
+    <%= form.submit "Create Trader" %>
+  </div>
+<% end %>
