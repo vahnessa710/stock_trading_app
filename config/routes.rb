@@ -22,7 +22,7 @@ Rails.application.routes.draw do
           patch :approve_user
         end
         collection do
-          get :pending
+          get :transactions
         end
       end
     end

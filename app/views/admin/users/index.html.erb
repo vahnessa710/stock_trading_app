@@ -1,36 +1,41 @@
 <div class ="main-admin-show">
-    <h1 class = "pending-approval-h1">Pending Approval</h1>
+  <h1 class = "pending-approval-h1">Pending Approval</h1>
     <% if @pending_users.any? %>
-        <div class="pending-user-card">
-            <% @pending_users.each do |user| %>
-                <div class="user-info-admin"> <i class="fa-solid fa-envelope"></i>&nbsp;<%= user.email %> <%= button_to "Approve", approve_user_admin_user_path(user), class: "approve-button", method: :patch %> </div>
-            <% end %> 
-        <% else %>
-            <p class = "no-pending-user">All users have been approved. Nothing pending at the moment.</p>
+      <div class="pending-user-card">
+          <% @pending_users.each do |user| %>
+              <div class="user-info-admin"> <i class="fa-solid fa-envelope"></i>&nbsp;<%= user.email %> <%= button_to "Approve", approve_user_admin_user_path(user), class: "approve-button", method: :patch %> </div>
+          <% end %> 
+      <% else %>
+        <p class = "no-pending-user">No pending approval at the moment.</p>
     <% end %>
-        </div>
+      </div>
 </div>
 <div class ="main-all-users">
-<h1 class = "pending-approval-h1" >All Traders</h1>
-<p><%= link_to 'See all pending approval', pending_admin_users_path %></p>
-    <div class ="new-user-button-container"><i class="fa-solid fa-plus"></i><span class = "new-user-button">New</span></div>
-        <table class="admin-user-table">
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Status</th>
-      <th>Created At</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.email %></td>
-        <td><%= user.status.capitalize %></td>
-        <td><%= user.created_at.strftime("%B %d, %Y") %></td>
-        <td><%= link_to "View Account", admin_user_path(user) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+  <h1 class = "pending-approval-h1" >All Traders</h1>
+      <div>
+        <%= link_to new_admin_user_path, class: "new-user-button" do %>
+          <i class="fa-solid fa-plus"></i>
+          <span>New</span>
+        <% end %>
+      </div>
+    <table class="admin-user-table">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Created At</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.email %></td>
+            <td><%= user.status.capitalize %></td>
+            <td><%= user.created_at.strftime("%B %d, %Y") %></td>
+            <td><%= link_to "View Account", admin_user_path(user), class: "view-account-btn" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 </div>

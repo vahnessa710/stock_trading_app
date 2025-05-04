@@ -2,6 +2,23 @@
     margin-top: 50px;
     text-align: center;
 }
+
+.edit-acct-admin {
+  padding: 10px 12px;
+  background-color: hsl(210, 3%, 59%);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.edit-acct-admin:hover {
+  background-color: hsl(210, 3%, 39%);
+}
+
 .account-id {
     display: flex;
     flex-wrap: wrap;

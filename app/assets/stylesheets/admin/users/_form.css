@@ -1,0 +1,49 @@
+.admin-users-form {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 24px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .admin-users-form label {
+    color: #2c3e50;
+  }
+  
+  .admin-users-form input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+  }
+  
+  .admin-users-form input:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  .admin-users-form-submit {
+    text-align: center;
+    margin-top: 24px;
+  }
+  
+  .admin-users-form-submit input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .admin-users-form-submit input[type="submit"]:hover {
+    background-color: #2980b9;
+  }
+  

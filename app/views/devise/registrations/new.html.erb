@@ -12,15 +12,15 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
           <div class="field">
-            <%= f.text_field :first_name, autocomplete: "given-name", placeholder: "First Name" %>
+            <%= f.text_field :first_name, autocomplete: "given-name", placeholder: "First Name", class: "sign-in-form" %>
           </div>
 
         <div class="field">
-          <%= f.text_field :last_name, autocomplete: "family-name", placeholder: "Last Name" %>
+          <%= f.text_field :last_name, autocomplete: "family-name", placeholder: "Last Name", class: "sign-in-form" %>
         </div>
 
         <div class="field">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "✉ Email" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "✉ Email", class: "sign-in-form" %>
           <% if resource.errors[:email].present? %>
             <div class="error-message">
               <p>Email <%= resource.errors[:email].first %></p>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="field">
-          <%= f.password_field :password, autocomplete: "current-password", placeholder: "🔒︎ Password"  %>
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "🔒︎ Password", class: "sign-in-form"  %>
           <% if resource.errors[:password].present? %> 
             <div class = "error-message">
               <p>Password <%= resource.errors[:password].first %></p>
@@ -38,7 +38,7 @@
         </div>
 
         <div class="field">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input", placeholder: "🔒︎ Confirm Password" %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input", placeholder: "🔒︎ Confirm Password", class: "sign-in-form" %>
           <% if resource.errors[:password_confirmation].present? %>
             <div class="error-message">
               <p><%= resource.errors[:password_confirmation].first %></p>

@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
     def index
         @pending_users = User.where(status: "pending")
-        @users = User.where(role:"trader")
+        @users = User.where(role:"trader").order(created_at: :desc)
     end
 
     def approve_user
@@ -43,6 +43,19 @@ class Admin::UsersController < ApplicationController
             render :new, status: :unprocessable_entity
         end
     end
+
+    def transactions
+        @users = User.where(role:'trader')
+        @transactions = Transaction.includes(:user).order(created_at: :desc)
+      
+        if params[:user_id].present?
+          @transactions = @transactions.where(user_id: params[:user_id])
+        end
+      
+        if params[:transaction_type].present?
+          @transactions = @transactions.where(transaction_type: params[:transaction_type])
+        end
+      end
 
     private
 

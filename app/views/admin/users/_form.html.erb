@@ -1,30 +1,32 @@
-<%= form_with model: [:admin, user] do |form| %>
-  <div>
-    <%= form.label :first_name %><br>
-    <%= form.text_field :first_name, required: true %>
-  </div>
+<div class = "admin-users-form">
+  <%= form_with model: [:admin, user] do |form| %>
+    <div>
+      <%= form.label :first_name %><br>
+      <%= form.text_field :first_name, required: true, class: "admin-users-form-field" %>
+    </div>
 
-  <div>
-    <%= form.label :last_name %><br>
-    <%= form.text_field :last_name, required: true %>
-  </div>
+    <div>
+      <%= form.label :last_name %><br>
+      <%= form.text_field :last_name, required: true, class: "admin-users-form-field" %>
+    </div>
 
-  <div>
-    <%= form.label :email %><br>
-    <%= form.email_field :email, required: true %>
-  </div>
+    <div class ="admin-users-form-field">
+      <%= form.label :email %><br>
+      <%= form.email_field :email, required: true, class: "admin-users-form-field" %>
+    </div>
 
-  <div>
-    <%= form.label :address %><br>
-    <%= form.text_field :address %>
-  </div>
+    <div class ="admin-users-form-field">
+      <%= form.label :location %><br>
+      <%= form.text_field :location, class: "admin-users-form-field"%>
+    </div>
 
-  <div>
-    <%= form.label :birthday %><br>
-    <%= form.date_field :birthday %>
-  </div>
+    <div class ="admin-users-form-field">
+      <%= form.label :phone %><br>
+      <%= form.telephone_field :phone, class: "admin-users-form-field" %>
+    </div>
 
-  <div>
-    <%= form.submit "Create Trader" %>
-  </div>
-<% end %>
+    <div class = "admin-users-form-submit">
+      <%= form.submit @user.persisted? ? "Update" : "Create Trader" %>
+    </div>
+  <% end %>
+</div>

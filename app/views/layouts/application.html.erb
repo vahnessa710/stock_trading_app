@@ -40,9 +40,10 @@
           <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "logout-button" %>
       </div>
         <% elsif current_user && current_user.admin? %>
-          <p style ="color:white;">ADMIN: <%= current_user.email %></p>
+          <p style ="color:white;">ADMIN_ACCOUNT: <%= current_user.email %></p>
+          <%= link_to "Home", admin_users_path, class: "nav-button" %>
           <%= link_to "Add Trader", new_admin_user_path, class: "nav-button" %>
-          <%= link_to "Transactions", class: "nav-button" %>
+          <%= link_to "Transactions", transactions_admin_users_path, class: "nav-button" %>
           <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete }, class: "logout-button" %>
         <% end %>
     </div>

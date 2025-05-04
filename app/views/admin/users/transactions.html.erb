@@ -1,0 +1,48 @@
+<div class = "admin-transactions-table-container">
+    <h1 class = "all-user-admin-tx-h1">All Users Transactions</h1>
+    <div class="transaction-filters">
+        <%= form_with url: transactions_admin_users_path, method: :get, local: true do %>
+            <div>
+                <label>User:</label>
+                <%= select_tag :user_id, options_from_collection_for_select(@users, :id, :email, params[:user_id]), include_blank: "All Users" %>
+            </div>
+            <div>
+                <label>Transaction Type:</label>
+                <%= select_tag :transaction_type, options_for_select(['buy', 'sell', 'deposit'], params[:transaction_type]), include_blank: "All Types" %>
+            </div>
+            <div>
+                <%= submit_tag "Filter", class: "filter-button" %>
+            </div>
+        <% end %>
+    </div>
+    <table class="admin-transactions-table">
+    <thead>
+        <tr>
+        <th>Transaction ID</th>
+        <th>User ID</th>
+        <th>User Email</th>
+        <th>Type</th>
+        <th>Symbol</th>
+        <th>Quantity</th>
+        <th>Created At</th>
+        <th>Amount</th>
+        <th>Payment Method</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @transactions.each do |tx| %>
+        <tr>
+            <td><%= tx.id %></td>
+            <td><%= tx.user_id %></td>
+            <td><%= tx.user.email %></td>
+            <td><%= tx.transaction_type.capitalize %></td>
+            <td><%= tx.symbol %></td>
+            <td><%= tx.quantity %></td>
+            <td><%= tx.created_at.strftime("%Y-%m-%d %H:%M") %></td>
+            <td><%= number_to_currency(tx.amount) %></td>
+            <td><%= tx.payment_method %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    </table>
+</div>
