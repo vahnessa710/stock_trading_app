@@ -1,27 +1,24 @@
 class Admin::UsersController < ApplicationController
+    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+    before_action :set_user_id, only: %i[approve_user show edit update]
+    before_action :set_traders, only: %i[index transactions]
+
     def index
         @pending_users = User.where(status: "pending")
-        @users = User.where(role:"trader").order(created_at: :desc)
     end
 
     def approve_user
-        @pending_user = User.find(params[:id])
-        @pending_user.update!(status: "approved", confirmed_at: Time.now)
-        UserMailer.approved_email(@pending_user).deliver_later
-        redirect_to admin_users_path, notice: "#{@pending_user.email} has been approved. Email Sent!"
+        @user.update!(status: "approved", confirmed_at: Time.now)
+        UserMailer.approved_email(@user).deliver_later
+        redirect_to admin_users_path, notice: "#{@user.email} has been approved. Email Sent!"
     end
     
-    def show
-        @user = User.find(params[:id])
-    end
+    def show; end
 
-    def edit 
-        @user = User.find(params[:id])
-    end
+    def edit; end
 
     def update
-        @user = User.find(params[:id])
-        if @user.update!(user_params)
+        if @user.update(user_params)
             redirect_to admin_user_path(@user), notice: 'Account Info is successfully updated.'
         else
             flash.alert = "Error in Updating Account Info."
@@ -34,9 +31,16 @@ class Admin::UsersController < ApplicationController
     end
 
     def create
-        @user = User.new(user_params_with_defaults)
+        password = generated_password
+        @user = User.new(user_params.merge(
+            password: password,
+            password_confirmation: password,
+            role: "trader",
+            status: "approved",
+            confirmed_at: Time.now
+        ))
         if @user.save
-            UserMailer.account_created_email(@user, "123456").deliver_later
+            UserMailer.account_created_email(@user, password).deliver_later
             redirect_to admin_users_path, notice: "Trader successfully created. Login credentials emailed to #{@user.email}."
         else
             flash.alert = "Error in creating new trader."
@@ -45,11 +49,15 @@ class Admin::UsersController < ApplicationController
     end
 
     def transactions
-        @users = User.where(role:'trader')
         @transactions = Transaction.includes(:user).order(created_at: :desc)
       
         if params[:user_id].present?
-          @transactions = @transactions.where(user_id: params[:user_id])
+            if @users.exists?(id: params[:user_id])
+                @transactions = @transactions.where(user_id: params[:user_id])
+            else
+                flash.alert = "Trader ID does not exist."
+                render :transactions
+            end
         end
       
         if params[:transaction_type].present?
@@ -63,18 +71,20 @@ class Admin::UsersController < ApplicationController
         @user = User.find(params[:id])
     end
 
-    def user_params
-        params.require(:user).permit(:first_name, :last_name, :email)
+    def set_traders
+        @users = User.where(role: 'trader').order(created_at: :desc)
     end
 
-    def user_params_with_defaults
-        user_params.merge(
-          password: "123456",
-          password_confirmation: "123456",
-          role: "trader",
-          status: "approved",
-          confirmed_at: Time.now
-        )
-      end
+    def user_params
+        params.require(:user).permit(:first_name, :last_name, :email, :status, :location, :phone, :role)
+    end
+
+    def record_not_found
+        redirect_to admin_users_path, alert: 'Trader ID does not exist'
+    end
+
+    def generated_password
+        "123456"
+    end
 end
   

@@ -16,6 +16,10 @@ Rails.application.routes.draw do
       end
     end
 
+    namespace :users do
+      get 'profile', to: 'profiles#show'
+    end    
+
     namespace :admin do
       resources :users do
         member do

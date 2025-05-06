@@ -1,12 +1,12 @@
 .account-info-h1{
-    margin-top: 50px;
-    text-align: center;
+  margin-top: 70px;
+  text-align: center;
 }
 
 .edit-acct-admin {
   padding: 10px 12px;
-  background-color: hsl(210, 3%, 59%);
-  color: #fff;
+  background-color: #f7a600;
+  color: rgb(43, 42, 42);
   text-decoration: none;
   border-radius: 6px;
   font-size: 14px;
@@ -16,7 +16,7 @@
 }
 
 .edit-acct-admin:hover {
-  background-color: hsl(210, 3%, 39%);
+  background-color: hsl(40, 100%, 45%);
 }
 
 .account-id {

@@ -2,31 +2,56 @@
   <%= form_with model: [:admin, user] do |form| %>
     <div>
       <%= form.label :first_name %><br>
-      <%= form.text_field :first_name, required: true, class: "admin-users-form-field" %>
+      <%= form.text_field :first_name, class: "admin-users-form-field" %>
+      <% if user.errors[:first_name].present? %> 
+        <div class = "error-message">
+          <p>First name <%= user.errors[:first_name].second %></p>
+        </div>
+      <% end %>
     </div>
 
     <div>
       <%= form.label :last_name %><br>
-      <%= form.text_field :last_name, required: true, class: "admin-users-form-field" %>
+      <%= form.text_field :last_name, class: "admin-users-form-field" %>
+      <% if user.errors[:last_name].present? %> 
+        <div class = "error-message">
+          <p>Last name <%= user.errors[:last_name].second %></p>
+        </div>
+      <% end %>
     </div>
 
     <div class ="admin-users-form-field">
       <%= form.label :email %><br>
-      <%= form.email_field :email, required: true, class: "admin-users-form-field" %>
+      <%= form.email_field :email, class: "admin-users-form-field" %>
+      <% if user.errors[:email].present? %> 
+        <div class = "error-message">
+          <p>Email <%= user.errors[:email].first %></p>
+        </div>
+      <% end %>
     </div>
 
     <div class ="admin-users-form-field">
       <%= form.label :location %><br>
       <%= form.text_field :location, class: "admin-users-form-field"%>
+      <% if user.errors[:location].present? %> 
+        <div class = "error-message">
+          <p>Location <%= user.errors[:location].second %></p>
+        </div>
+      <% end %>
     </div>
 
     <div class ="admin-users-form-field">
       <%= form.label :phone %><br>
       <%= form.telephone_field :phone, class: "admin-users-form-field" %>
+      <% if user.errors[:phone].present? %> 
+        <div class = "error-message">
+          <p>Phone <%= user.errors[:phone].second %></p>
+        </div>
+      <% end %>
     </div>
-
+    
     <div class = "admin-users-form-submit">
-      <%= form.submit @user.persisted? ? "Update" : "Create Trader" %>
+      <%= form.submit @user.persisted? ? "Update" : "Create New Trader" %>
     </div>
   <% end %>
 </div>

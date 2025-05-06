@@ -2,25 +2,35 @@
   <div class = "left">
     <div class = "catch-container">
       <p class = "catch-tag">Catch Your Next Trading Opportunity</p>
-      <p class = "under-catch-tag">Your funds are always backed 1:1 on TradeApp with our regularly published audits on our Proof of Reserves</p>
+      <p class = "under-catch-tag">Your funds are always backed 1:1 on <span class="brand-2"><i class="fa-solid fa-gem brand-1"></i>&nbsp;<span class="brand-1">Ruby</span>Exchange</span> with our regularly published audits on our Proof of Reserves</p>
     </div>
   </div>
   <div class = "right">
     <div class = "login-form-container">
       <h1>Sign up</h1>
-
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-
+        <div style = "display:flex;">
           <div class="field">
-            <%= f.text_field :first_name, autocomplete: "given-name", placeholder: "First Name", class: "sign-in-form" %>
+            <i class="fa-solid fa-circle-user"></i><%= f.text_field :first_name, autocomplete: "given-name", placeholder: "First Name", class: "sign-in-form" %>
+            <% if resource.errors[:first_name].present? %>
+              <div class="error-message">
+                <p>First Name <%= resource.errors[:first_name].first %></p>
+              </div>
+            <% end %>
           </div>
-
-        <div class="field">
-          <%= f.text_field :last_name, autocomplete: "family-name", placeholder: "Last Name", class: "sign-in-form" %>
+          <div class="field">
+            <%= f.text_field :last_name, autocomplete: "family-name", placeholder: "Last Name", class: "sign-in-form" %>
+            <% if resource.errors[:email].present? %>
+              <div class="error-message">
+                <p>Last Name <%= resource.errors[:last_name].first %></p>
+              </div>
+            <% end %>
+          </div>
         </div>
 
         <div class="field">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "✉ Email", class: "sign-in-form" %>
+          <i class="fa-solid fa-envelope"></i>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "sign-in-form" %>
           <% if resource.errors[:email].present? %>
             <div class="error-message">
               <p>Email <%= resource.errors[:email].first %></p>
@@ -29,7 +39,8 @@
         </div>
 
         <div class="field">
-          <%= f.password_field :password, autocomplete: "current-password", placeholder: "🔒︎ Password", class: "sign-in-form"  %>
+          <i class="fa-solid fa-lock"></i>
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", class: "sign-in-form"  %>
           <% if resource.errors[:password].present? %> 
             <div class = "error-message">
               <p>Password <%= resource.errors[:password].first %></p>
@@ -38,10 +49,31 @@
         </div>
 
         <div class="field">
-          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-input", placeholder: "🔒︎ Confirm Password", class: "sign-in-form" %>
+          <i class="fa-solid fa-lock"></i>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", class: "sign-in-form" %>
           <% if resource.errors[:password_confirmation].present? %>
             <div class="error-message">
               <p><%= resource.errors[:password_confirmation].first %></p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="input-with-icon">
+          <i class="fa-solid fa-house"></i>
+          <%= f.text_field :location, class: "sign-in-form", placeholder: "Location" %>
+          <% if resource.errors[:location].present? %>
+            <div class="error-message">
+              <p><%= resource.errors[:location].first %></p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="input-with-icon">
+          <i class="fa-solid fa-phone"></i>
+          <%= f.telephone_field :phone, class: "sign-in-form", placeholder: "Phone Number" %>
+          <% if resource.errors[:phone].present? %>
+            <div class="error-message">
+              <p><%= resource.errors[:phone].first %></p>
             </div>
           <% end %>
         </div>

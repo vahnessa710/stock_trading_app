@@ -11,7 +11,7 @@
       <%= form_with url: fetch_buy_price_trades_path, method: :get, local: true do |form| %>
         <div class="form-group">
           <%= form.label :symbol, "Stock" %>
-          <%= form.select :symbol, options_for_select(["AAPL", "AMZN", "GOOGL", "META", "MSFT", "NVDA", "TSLA"], params[:symbol]), { prompt: "(Select stock)" }, { class: "input"} %>
+          <%= form.select :symbol, options_for_select(STOCKS_CONFIG[:allowed_stocks], params[:symbol]), { prompt: "(Select stock)" }, { class: "input"} %>
           <% if @holding.errors[:symbol].any? %>
             <span class="field-error"><%= @holding.errors[:symbol].first %></span>
           <% end %>
@@ -39,7 +39,8 @@
           <% if @holding.errors[:quantity].any? %>
             <span class="field-error"><%= @holding.errors[:symbol].first %></span>
           <% end %>
-          <p>Available Balance:$<%= number_with_precision(@balance, precision: 2, delimiter: ',')%> 
+          <p>Order Value: <strong><%= number_to_currency(@order_value || 0) %></strong></p>
+          <p>Available Balance:<strong>$<%= number_with_precision(@balance, precision: 2, delimiter: ',')%></strong> 
           <%= link_to new_holding_path do %>
             <i class="fa-solid fa-square-plus add-balance"></i>
           <% end %>

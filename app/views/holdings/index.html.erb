@@ -3,7 +3,7 @@
     <i class="fa-solid fa-envelope"></i>&nbsp;<%= current_user.email %> 
     <span class="uid">UID: <%= current_user.id %></span>
   </div>
-  <div class="user-status"><i class="fa-solid fa-user-check user-icon"></i>&nbsp; <%= current_user.status %></div>
+  <div class="user-status"><i class="fa-solid fa-user-check user-icon"></i>&nbsp; <%= current_user.status.capitalize %></div>
 
   <!-- Assets Overview Card -->
   <div class="dashboard-container">
@@ -16,12 +16,11 @@
         <p class="asset-value"><%= number_with_precision(@total_value, precision: 2, delimiter: ',') %> <span class="usd">USD</span></p>
         <p class="asset-label">Fiat Balance</p>
         <p class="asset-value"><%= number_with_precision(@balance, precision: 2, delimiter: ',') %> <span class="usd">USD</span></p>
-        <p class="asset-label">Unrealized Profit/Loss</p>
-        <p class="asset-value <%= @unrealized_profit >= 0 ? 'profit-green' : 'sell-red' %>">
-          <%= number_with_precision(@unrealized_profit, precision: 2, delimiter: ',') %>
+        <p class="asset-label">Profit/Loss (on Fiat)</p>
+        <p class="asset-value <%= @fiat_pnl >= 0 ? 'profit-green' : 'sell-red' %>">
+          <%= number_with_precision(@fiat_pnl, precision: 2, delimiter: ',') %>
           <span class="usd">USD</span>
         </p>
-
 
         <div class="button-group">
           <%= link_to 'Deposit', new_holding_path, class: "btn dark" %>
@@ -33,35 +32,35 @@
 
   <!-- Portfolio Section -->
   <div class="portfolio-container">
-  <p class="portfolio-header">📊 My Portfolio</p>
+    <p class="portfolio-header">📊 My Portfolio</p>
 
-  <% if @holdings.any? %>
-    <div class="card">
-      <table class="portfolio-table">
-        <thead>
-          <tr>
-            <th>Stock</th>
-            <th>Quantity</th>
-            <th>Total Value</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @holdings.each do |holding| %>
+    <% if @holdings.any? %>
+      <div class="card">
+        <table class="portfolio-table">
+          <thead>
             <tr>
-              <td><%= holding.symbol %></td>
-              <td><%= holding.total_quantity %></td>
-              <td><%= holding.total_value %> USD</td>
-              <td>
-                <%= link_to "Sell", sell_trades_path(symbol: holding.symbol), class: "btn btn-secondary", data: { confirm: "Sell #{holding.symbol}?" } %>
-              </td>
+              <th>Stock</th>
+              <th>Quantity</th>
+              <th>Total Value</th>
+              <th>Action</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% else %>
-    <p>No holdings available.</p>
-  <% end %>
-</div>
+          </thead>
+          <tbody>
+            <% @holdings.each do |holding| %>
+              <tr>
+                <td><%= holding.symbol %></td>
+                <td><%= holding.total_quantity %></td>
+                <td><%= holding.total_value %> USD</td>
+                <td>
+                  <%= link_to "Sell", sell_trades_path(symbol: holding.symbol), class: "btn btn-secondary", data: { confirm: "Sell #{holding.symbol}?" } %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p>No holdings available.</p>
+    <% end %>
+  </div>
 </div>

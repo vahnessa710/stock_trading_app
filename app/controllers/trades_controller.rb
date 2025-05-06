@@ -1,13 +1,15 @@
 class TradesController < ApplicationController
   before_action :set_sell_data, only: [:new_sell, :create_sell, :fetch_sell_price]
   before_action :set_buy_data, only: [:new_buy, :fetch_buy_price]
+  before_action :validate_symbol_param, only: [:fetch_buy_price, :create_buy]
 
-  def new_buy
-  end
+  def new_buy; end
 
   def create_buy
     @holding = current_user.holdings.build(holding_params)
     @balance = current_user.balance
+    # @order_value = total_cost to be continued!!
+    
     if @holding.buy_price.present? && @holding.quantity.present?
       total_cost = @holding.quantity * @holding.buy_price
       
@@ -108,5 +110,13 @@ class TradesController < ApplicationController
   def set_buy_data
     @holding = Holding.new
     @balance = current_user.balance
-  end 
+  end
+
+  def validate_symbol_param
+    symbol = params[:symbol]&.upcase || holding_params[:symbol]
+    unless STOCKS_CONFIG[:allowed_stocks].include?(symbol)
+      flash.alert = "Invalid stock, please select from the stock options."
+      render :new_buy, status: :unprocessable_entity
+    end
+  end
 end

@@ -1,7 +1,7 @@
 .admin-users-form {
     max-width: 500px;
-    margin: 30px auto;
-    padding: 24px;
+    margin: 50px auto;
+    padding: 30px;
     background-color: #ffffff;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -19,6 +19,7 @@
     border-radius: 6px;
     font-size: 14px;
     transition: border-color 0.2s ease;
+    margin-bottom: 15px;
   }
   
   .admin-users-form input:focus {
@@ -32,8 +33,8 @@
   }
   
   .admin-users-form-submit input[type="submit"] {
-    background-color: #3498db;
-    color: white;
+    background-color: #f7a600;
+    color: rgb(20, 20, 20);
     padding: 10px 20px;
     font-weight: bold;
     border: none;
@@ -44,6 +45,6 @@
   }
   
   .admin-users-form-submit input[type="submit"]:hover {
-    background-color: #2980b9;
+    background-color: hsl(40, 100%, 45%);
   }
   

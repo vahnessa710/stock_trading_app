@@ -8,11 +8,23 @@
 .user-info {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  margin-top: 15px;
+}
+
+.user-status{
+  margin-top:15px;
+  margin-bottom: 50px;
+  background-color: #fff9db; /* soft pastel yellow */
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #f0e6a8;
+  width: 18%;
 }
 
 .uid {
   font-size: 0.9rem;
   color: #888;
+  margin-left: 20px;
 }
 
 .user-icon{

@@ -1,0 +1,8 @@
+allowed_stocks:
+  - AAPL
+  - AMZN
+  - GOOGL
+  - META
+  - MSFT
+  - NVDA
+  - TSLA
