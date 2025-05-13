@@ -1,9 +1,11 @@
 <p>Welcome to RubyExchange, <%= @email %>!</p>
 
-<p>You have successfully signed up to our platform.</p>
-<p>We'll send an email to let you know when your account is ready to trade.</p>
-<p>Thanks for joining and have a great day!</p>
+<p>You have successfully signed up to our platform. Please confirm this is you by clicking the link below:</p>
+<p><%= link_to 'Confirm my account sign up', confirmation_url(@resource, confirmation_token: @token) %></p>
 
+<p>We'll send an email to let you know when your account is ready to trade.</p>
+
+<p>Thanks for joining and have a great day!</p>
 <p>Note: This is an automated email. Please do not reply.</p>
 
 Best Regards,

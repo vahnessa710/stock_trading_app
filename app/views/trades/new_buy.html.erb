@@ -12,9 +12,6 @@
         <div class="form-group">
           <%= form.label :symbol, "Stock" %>
           <%= form.select :symbol, options_for_select(STOCKS_CONFIG[:allowed_stocks], params[:symbol]), { prompt: "(Select stock)" }, { class: "input"} %>
-          <% if @holding.errors[:symbol].any? %>
-            <span class="field-error"><%= @holding.errors[:symbol].first %></span>
-          <% end %>
         </div>
         <div class="form-actions">
           <%= form.submit "Check Price", class: 'btn btn-primary' %>
@@ -28,18 +25,13 @@
         </div>
       <% end %>
     </div>
-
     <!-- Buy Stock Form -->
     <div class="card">
       <h2>Buy Stocks</h2>
       <%= form_with model: @holding, url: buy_trades_path, method: :post, local: true do |f| %>
         <div class="form-group">
           <%= f.label :quantity, "Quantity" %>
-          <%= f.number_field :quantity, placeholder:"Amount (#{@symbol})", min: 1, class: "input" %>
-          <% if @holding.errors[:quantity].any? %>
-            <span class="field-error"><%= @holding.errors[:symbol].first %></span>
-          <% end %>
-          <p>Order Value: <strong><%= number_to_currency(@order_value || 0) %></strong></p>
+          <%= f.number_field :quantity, placeholder:"Amount (#{@symbol})", class: "input", id: "quantity-input"  %>
           <p>Available Balance:<strong>$<%= number_with_precision(@balance, precision: 2, delimiter: ',')%></strong> 
           <%= link_to new_holding_path do %>
             <i class="fa-solid fa-square-plus add-balance"></i>
@@ -49,7 +41,7 @@
         <% if @symbol.present? %>
           <%= f.hidden_field :symbol, value: @symbol %>
         <% end %>
-        <%= f.hidden_field :buy_price, value: @stock_price %>
+        <%= f.hidden_field :buy_price, value: @stock_price, id: "buy-price", data: { buy_price: @stock_price }  %>
 
         <div class="form-actions">
           <%= f.submit "Buy Stock", class: 'btn btn-primary' %>
@@ -63,3 +55,21 @@
 
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const quantityInput = document.getElementById("quantity-input");
+    const buyPriceField = document.getElementById("buy-price");
+    const orderValueDisplay = document.getElementById("order-value");
+
+    if (quantityInput && buyPriceField && orderValueDisplay) {
+      const buyPrice = parseFloat(buyPriceField.dataset.buy_price);
+
+      quantityInput.addEventListener("input", function() {
+        const quantity = parseInt(quantityInput.value, 10);
+        const orderValue = (isNaN(quantity) || quantity < 0) ? 0 : quantity * buyPrice;
+        orderValueDisplay.textContent = orderValue.toFixed(2);
+      });
+    }
+  });
+</script>

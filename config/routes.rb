@@ -1,16 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
     resources :holdings
-  
     resources :transactions, only: [:index]
-
     resources :trades, only: [] do
       collection do
         get :fetch_buy_price
         get :fetch_sell_price
         get :buy,  to: "trades#new_buy"
         post :buy, to: "trades#create_buy"
-  
         get :sell, to: "trades#new_sell"
         post :sell, to: "trades#create_sell"
       end
@@ -42,4 +39,6 @@ Rails.application.routes.draw do
         root to: "devise/sessions#new", as: :unauthenticated_root
       end
     end
+    
+    match "*unmatched", to: "errors#not_found", via: :all
 end

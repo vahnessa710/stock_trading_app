@@ -4,11 +4,16 @@ class User < ApplicationRecord
   before_create :set_defaults
   has_many :holdings, dependent: :destroy
   has_many :transactions, dependent: :destroy
+  validates :email, uniqueness: true
   validates :first_name, presence: true, length: { minimum: 2 }, format: { with: /\A[a-zA-Z]+(?: [a-zA-Z]+)*\z/, message: "only allows letters and spaces" }
   validates :last_name, presence: true, length: { minimum: 2 }, format: { with: /\A[a-zA-Z]+(?: [a-zA-Z]+)*\z/, message: "only allows letters and spaces" }
   validates :phone, presence: true, format: { with: /\A\+?\d{10,15}\z/, message: "must be a valid phone number (10–15 digits)" }
   validates :location, presence: true, length: { minimum: 5 }
 
+  def active_for_authentication? # to prevent user from logging in after confirmation if account is still pending
+    super && approved?
+  end
+  
   def admin?
     role == "admin"
   end

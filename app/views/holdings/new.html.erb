@@ -7,14 +7,14 @@
   </div>
   
     <div class="holding-new-right-card">
-      <%= form_with url: holdings_path, method: :post, local: true do %>
+      <%= form_with url: holdings_path, method: :post do %>
         <div class="deposit-form-group">
           <%= label_tag :balance, "Deposit Amount (USD)" %>
-          <%= number_field_tag :balance, nil, step: 0.01, min: 1, required: true, class: "input", placeholder: "Amount (USD)" %>
+          <%= number_field_tag :balance, params[:balance], step: 0.01, class: "input", placeholder: "Amount (USD)" %>
         </div>
         <div class="deposit-form-group">
           <%= label_tag :payment_method, "Payment Method" %>
-          <%= select_tag :payment_method, options_for_select(['Credit Card', 'Gcash', 'Maya', 'Bank Transfer']), required: true, class: "input" %>
+          <%= select_tag :payment_method, options_for_select(['Credit Card', 'Gcash', 'Maya', 'Bank Transfer']), class: "input" %>
         </div>
         <div class="deposit-form-actions">
           <%= submit_tag "Deposit", class: "btn btn-primary" %>

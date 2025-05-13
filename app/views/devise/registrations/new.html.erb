@@ -7,29 +7,28 @@
   </div>
   <div class = "right">
     <div class = "login-form-container">
-      <h1>Sign up</h1>
+      <h1>Sign up <i class="fa-solid fa-circle-user"></i> </h1>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <div style = "display:flex;">
-          <div class="field">
-            <i class="fa-solid fa-circle-user"></i><%= f.text_field :first_name, autocomplete: "given-name", placeholder: "First Name", class: "sign-in-form" %>
-            <% if resource.errors[:first_name].present? %>
-              <div class="error-message">
-                <p>First Name <%= resource.errors[:first_name].first %></p>
-              </div>
-            <% end %>
-          </div>
-          <div class="field">
-            <%= f.text_field :last_name, autocomplete: "family-name", placeholder: "Last Name", class: "sign-in-form" %>
-            <% if resource.errors[:email].present? %>
-              <div class="error-message">
-                <p>Last Name <%= resource.errors[:last_name].first %></p>
-              </div>
-            <% end %>
-          </div>
+        
+        <div class="field">
+          <%= f.text_field :first_name, autocomplete: "given-name", placeholder: "First Name", class: "sign-in-form" %>
+          <% if resource.errors[:first_name].present? %>
+            <div class="error-message">
+              <p>First Name <%= resource.errors[:first_name].first %></p>
+            </div>
+          <% end %>
         </div>
 
         <div class="field">
-          <i class="fa-solid fa-envelope"></i>
+          <%= f.text_field :last_name, autocomplete: "family-name", placeholder: "Last Name", class: "sign-in-form" %>
+          <% if resource.errors[:email].present? %>
+            <div class="error-message">
+              <p>Last Name <%= resource.errors[:last_name].first %></p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="field">
           <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class: "sign-in-form" %>
           <% if resource.errors[:email].present? %>
             <div class="error-message">
@@ -39,7 +38,6 @@
         </div>
 
         <div class="field">
-          <i class="fa-solid fa-lock"></i>
           <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password", class: "sign-in-form"  %>
           <% if resource.errors[:password].present? %> 
             <div class = "error-message">
@@ -49,7 +47,6 @@
         </div>
 
         <div class="field">
-          <i class="fa-solid fa-lock"></i>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password", class: "sign-in-form" %>
           <% if resource.errors[:password_confirmation].present? %>
             <div class="error-message">
@@ -59,7 +56,6 @@
         </div>
 
         <div class="input-with-icon">
-          <i class="fa-solid fa-house"></i>
           <%= f.text_field :location, class: "sign-in-form", placeholder: "Location" %>
           <% if resource.errors[:location].present? %>
             <div class="error-message">
@@ -69,7 +65,6 @@
         </div>
 
         <div class="input-with-icon">
-          <i class="fa-solid fa-phone"></i>
           <%= f.telephone_field :phone, class: "sign-in-form", placeholder: "Phone Number" %>
           <% if resource.errors[:phone].present? %>
             <div class="error-message">

@@ -1,23 +1,23 @@
 class Admin::UsersController < ApplicationController
-    rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+    before_action :authenticate_admin!
     before_action :set_user_id, only: %i[approve_user show edit update]
     before_action :set_traders, only: %i[index transactions]
 
-    def index
+    def index 
         @pending_users = User.where(status: "pending")
     end
 
-    def approve_user
-        @user.update!(status: "approved", confirmed_at: Time.now)
+    def approve_user 
+        @user.update!(status: "approved")
         UserMailer.approved_email(@user).deliver_later
         redirect_to admin_users_path, notice: "#{@user.email} has been approved. Email Sent!"
     end
     
-    def show; end
+    def show; end 
 
-    def edit; end
+    def edit; end 
 
-    def update
+    def update 
         if @user.update(user_params)
             redirect_to admin_user_path(@user), notice: 'Account Info is successfully updated.'
         else
@@ -26,11 +26,11 @@ class Admin::UsersController < ApplicationController
         end
     end
 
-    def new
+    def new 
         @user = User.new
     end
 
-    def create
+    def create 
         password = generated_password
         @user = User.new(user_params.merge(
             password: password,
@@ -48,9 +48,8 @@ class Admin::UsersController < ApplicationController
         end
     end
 
-    def transactions
+    def transactions #
         @transactions = Transaction.includes(:user).order(created_at: :desc)
-      
         if params[:user_id].present?
             if @users.exists?(id: params[:user_id])
                 @transactions = @transactions.where(user_id: params[:user_id])
@@ -59,7 +58,6 @@ class Admin::UsersController < ApplicationController
                 render :transactions
             end
         end
-      
         if params[:transaction_type].present?
           @transactions = @transactions.where(transaction_type: params[:transaction_type])
         end
@@ -79,12 +77,8 @@ class Admin::UsersController < ApplicationController
         params.require(:user).permit(:first_name, :last_name, :email, :status, :location, :phone, :role)
     end
 
-    def record_not_found
-        redirect_to admin_users_path, alert: 'Trader ID does not exist'
-    end
-
     def generated_password
-        "123456"
+        SecureRandom.alphanumeric(8)
     end
 end
   

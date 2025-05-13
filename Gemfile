@@ -21,6 +21,12 @@ gem 'devise'
 gem "chartkick"
 gem "groupdate"
 
+group :development, :test do
+  gem 'factory_bot_rails'
+end
+group :development, :test do
+  gem 'rspec-rails', '~> 8.0.0'
+end
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
