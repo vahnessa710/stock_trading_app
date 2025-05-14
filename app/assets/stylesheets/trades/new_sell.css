@@ -92,12 +92,13 @@
 }
 
 .btn-secondary {
-  background-color: #e2e6ea;
-  color: #333;
+  background-color: #E53935;
+  color: #e2e6ea;
+  /* color: #333; */
 }
 
 .btn-secondary:hover {
-  background-color: #d6d8db;
+  background-color: hsl(1, 77%, 50%);
 }
 
 .form-actions {

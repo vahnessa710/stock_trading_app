@@ -56,7 +56,9 @@
                 <td class="<%= transaction.transaction_type == 'buy' ? 'buy-type' : 'sell-type' %>">
                   <%= transaction.transaction_type.capitalize %>
                 </td>
-                <td><%= transaction.symbol %></td>
+                <td>
+                <%= image_tag "https://assets.parqet.com/logos/symbol/#{transaction.symbol}", alt: "#{transaction.symbol} logo", class: "stock-logo" %>
+                <%= transaction.symbol %></td>
                 <td><%= transaction.quantity %></td>
                 <td><%= number_to_currency(transaction.amount, precision: 2, unit: "$", delimiter: ",") %></td>
                 <td><%= transaction.created_at.strftime("%B %d, %Y %H:%M") %></td>

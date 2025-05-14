@@ -7,9 +7,9 @@
 
   <!-- Assets Overview Card -->
   <div class="dashboard-container">
-    <div class="card">
+    <div class="dashboard-container-card">
       <div class="card-header">
-        <h2>Assets Overview <i class="fa-solid fa-eye"></i></h2>
+        <h2>Assets Overview <i class="fa-solid fa-eye eye-icon"></i></h2>
       </div>
       <div class="asset-details">
         <p class="asset-label">Total Assets(Stocks)</p>
@@ -32,10 +32,9 @@
 
   <!-- Portfolio Section -->
   <div class="portfolio-container">
-    <p class="portfolio-header">📊 My Portfolio</p>
-
     <% if @holdings.any? %>
       <div class="card">
+      <p class="portfolio-header">📊 My Portfolio</p>
         <table class="portfolio-table">
           <thead>
             <tr>
@@ -48,7 +47,9 @@
           <tbody>
             <% @holdings.each do |holding| %>
               <tr>
-                <td><%= holding.symbol %></td>
+              <td>
+                <%= image_tag "https://assets.parqet.com/logos/symbol/#{holding.symbol}", alt: "#{holding.symbol} logo", class: "stock-logo" %>
+                <%= holding.symbol %></td>
                 <td><%= holding.total_quantity %></td>
                 <td><%= holding.total_value %> USD</td>
                 <td>

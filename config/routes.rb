@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-    resources :holdings
+    resources :holdings do
+    end
     resources :transactions, only: [:index]
     resources :trades, only: [] do
       collection do
@@ -40,5 +41,5 @@ Rails.application.routes.draw do
       end
     end
     
-    match "*unmatched", to: "errors#not_found", via: :all
+    # match "*unmatched", to: "errors#not_found", via: :all
 end

@@ -1,6 +1,6 @@
 class HoldingsController < TradersController
     before_action :set_balance, only: %i[index new create]
-    
+
     def index
         @holdings = current_user.holdings.owned.consolidated_by_symbol
         @total_value = @holdings.sum(&:total_value)
